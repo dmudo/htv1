@@ -1,8 +1,11 @@
-#include <Adafruit_GFX.h>
-#include <Adafruit_PCD8544.h>
-#include <dht.h>
+/*********
+  D'angelo Martins
+  Projeto completo em http://dangelo.tk/ 
+*********/
 
-
+#include <Adafruit_GFX.h> //LIB https://github.com/adafruit/Adafruit-GFX-Library
+#include <Adafruit_PCD8544.h> //LIB https://github.com/adafruit/Adafruit-PCD8544-Nokia-5110-LCD-library
+#include <dht.h>//LIB Biblioteca
 #define dht_dpin A1 //Pino DATA do Sensor ligado na porta Analogica A1
 
 dht DHT;
@@ -12,6 +15,7 @@ dht DHT;
 // pin 10 - Data/Command select (D/C)
 // pin 11 - LCD chip select (CS/CE)
 // pin 12 - LCD reset (RST)
+
 Adafruit_PCD8544 display = Adafruit_PCD8544(8, 9, 10, 11, 12);
 
 // Variáveis que guardam a temperatura máxima e mínima
@@ -20,10 +24,6 @@ int maxtemp = -100,mintemp = 100;
 // Variáveis que guardam a umidade máxima e mínima 
 int maxhum = -100, minhum = 100; 
 int temperatura,umidade;
-
-
-//static unsigned char PROGMEM grau[] =
-//{ B00001100, B00010010, B00001100, B00000000,}; //Array simbolo grau
 
 void setup()
 {
@@ -59,19 +59,17 @@ void loop()
   display.setCursor(3,5);  //Seta a posição do cursor
   display.print("Temp : ");  
   display.print(temperatura);
+  
   //Desenha o simbolo do grau na posicao 56,5
-//  display.drawBitmap(56,5, grau, 8, 4, BLACK); 
   display.setCursor(65,5);
   display.println("C");
   display.setCursor(3,13);
   display.print("Umid : ");
   display.print(umidade);
   display.println(" %\n");
-
   display.setCursor(3,24);
   display.print("Max:");
   display.print(maxtemp);
- // display.drawBitmap(37,24, grau, 8, 4, BLACK);
   display.setCursor(46,24);
   display.print("C/");
   display.print(maxhum);
@@ -79,11 +77,11 @@ void loop()
   display.setCursor(3,32);
   display.print("Min:");
   display.print(mintemp);
- // display.drawBitmap(37,32, grau, 8, 4, BLACK);
   display.setCursor(46,32);
   display.print("C/");
   display.print(minhum);
   display.println(" %");
   display.display();
 
-  delay(2000); //Aduarda 2 segundos e reinicia o processo
+  delay(2000); //Aguarda 2 segundos e reinicia o processo.
+ }
